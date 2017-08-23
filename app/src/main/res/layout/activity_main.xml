@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="io.github.young.sonydafaisgood.MainActivity">
+
+
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/smile_of_kaz"
+        layout="@layout/content_main" />
+
+    <ImageView
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:background="@drawable/design_fab_background"
+        android:backgroundTintMode="multiply"
+        android:backgroundTint="@color/colorAccent"
+        android:padding="8dp"
+        android:elevation="6dp"
+        android:src="@android:drawable/ic_menu_send" />
+
+</FrameLayout>
