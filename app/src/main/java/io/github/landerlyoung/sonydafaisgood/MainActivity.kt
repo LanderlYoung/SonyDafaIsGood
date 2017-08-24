@@ -1,7 +1,6 @@
-package io.github.young.sonydafaisgood
+package io.github.landerlyoung.sonydafaisgood
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -9,10 +8,10 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.Choreographer
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.inputMethodManager
 import org.jetbrains.anko.toast
 import java.io.File
 import java.io.FileOutputStream
@@ -28,8 +27,7 @@ class MainActivity : Activity() {
     }
 
     private fun takeSnapShotAndShare() {
-        (getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromInputMethod(
-                window.decorView.windowToken, 0)
+        inputMethodManager.hideSoftInputFromInputMethod(smile_of_kaz.windowToken, 0)
 
         main_title.isCursorVisible = false
         sub_title.isCursorVisible = false
@@ -55,9 +53,7 @@ class MainActivity : Activity() {
                         shareImage(save)
                     }
                 }
-                return@postFrameCallback
-            }
-            toast(R.string.failed_to_save_pic)
+            } ?: toast(R.string.failed_to_save_pic)
         }
     }
 
@@ -75,25 +71,31 @@ class MainActivity : Activity() {
         intent.type = "image/jpeg"
         intent.putExtra(Intent.EXTRA_STREAM, uri)
         startActivity(Intent.createChooser(intent, getString(R.string.smile_by_app)))
+
+        throw RuntimeException()
     }
 
     private fun takeSnapShot(view: View): Bitmap? {
-        val oldLayerType = view.layerType
-        view.buildDrawingCache(true)
-        var bitmap = view.getDrawingCache(true)
+        try {
+            val oldLayerType = view.layerType
+            view.buildDrawingCache(true)
+            var bitmap = view.getDrawingCache(true)
 
-        if (bitmap == null && view.width > 0 && view.height > 0) {
-            bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
-            val canvas = Canvas(bitmap)
-            canvas.save()
+            if (bitmap == null && view.width > 0 && view.height > 0) {
+                bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
+                val canvas = Canvas(bitmap)
+                canvas.save()
 
-            // do draw
-            canvas.translate(-view.scrollY.toFloat(), -view.scrollY.toFloat())
-            view.draw(canvas)
-            canvas.restore()
+                // do draw
+                canvas.translate(-view.scrollY.toFloat(), -view.scrollY.toFloat())
+                view.draw(canvas)
+                canvas.restore()
+            }
+
+            view.setLayerType(oldLayerType, null)
+            return bitmap
+        } catch (oom: OutOfMemoryError) {
+            return null
         }
-
-        view.setLayerType(oldLayerType, null)
-        return bitmap
     }
 }

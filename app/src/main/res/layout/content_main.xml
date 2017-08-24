@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    tools:context="io.github.young.sonydafaisgood.MainActivity"
+    tools:context="io.github.landerlyoung.sonydafaisgood.MainActivity"
     tools:showIn="@layout/activity_main">
 
     <ImageView

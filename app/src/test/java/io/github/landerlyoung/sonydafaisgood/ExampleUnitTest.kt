@@ -1,4 +1,4 @@
-package io.github.young.sonydafaisgood
+package io.github.landerlyoung.sonydafaisgood
 
 import org.junit.Test
 
