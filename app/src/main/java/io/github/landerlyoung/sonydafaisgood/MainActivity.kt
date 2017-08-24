@@ -71,8 +71,6 @@ class MainActivity : Activity() {
         intent.type = "image/jpeg"
         intent.putExtra(Intent.EXTRA_STREAM, uri)
         startActivity(Intent.createChooser(intent, getString(R.string.smile_by_app)))
-
-        throw RuntimeException()
     }
 
     private fun takeSnapShot(view: View): Bitmap? {
