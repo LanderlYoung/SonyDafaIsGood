@@ -1,5 +1,12 @@
 # SonyDafaIsGood
 
+ ![](https://img.shields.io/github/forks/LanderlYoung/SonyDafaIsGood.svg)
+ ![](https://img.shields.io/github/issues/LanderlYoung/SonyDafaIsGood.svg)
+ ![](https://img.shields.io/badge/build-pass-blue.svg)
+ ![](https://img.shields.io/github/license/LanderlYoung/SonyDafaIsGood.svg) 
+![](https://img.shields.io/badge/SonyDafa-Good-red.svg)
+
+
 ![](art/pic.jpg)
 
 ***
